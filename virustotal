@@ -69,7 +69,7 @@ check_update() {
   script_name="$(basename "${0}")"
   script_path="$(dirname "$(readlink -f "$0")")"
   caller="${script_name}->${FUNCNAME[0]}"
-  script_install_path="$(virustotal script-path)"
+  script_install_path="$(${script_name} script-path)"
   echo "[${caller}]: Checking ${script_name} for update..."
   temp_file="${TEMP_PATH}/${script_name}"
   # The github raw hosting will not be updated immediately after I push the update to github. Need to wait about 5 minutes
@@ -258,7 +258,7 @@ scan() {
 
   local caller ip_lookup previous_output
 
-  local target ip_address noise riot classification name link last_seen message last_scan_date
+  local target ip_address as_owner harmless malicious suspicious undetected timeout last_scan_date
 
   caller="${SCRIPT_NAME}->${FUNCNAME[0]}"
   if [ -z "${TARGET}" ]; then
